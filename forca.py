@@ -1,27 +1,17 @@
 import random
 
+
 def jogar():
-    print("****************************************")
-    print("Seja bem-vindo ao jogo de Forca!")
-    print("****************************************")
 
-    arquivo = open("frutas.txt", "r")
-    palavras = []
+    msg_abertura()
+    palavra_secreta = load_palavra_secreta()
 
-    for linha in arquivo:
-        linha = linha.strip()
-        palavras.append(linha)
-    arquivo.close()
+    letras_acertadas = inicia_letra_acertada(palavra_secreta)
 
-    numero = random.randrange(0, len(palavras))
-    palavra_secreta = palavras[numero].upper()
-
-
-    letras_acertadas = ["_" for letra in palavra_secreta]
     enforcou = False
     acertou = False
     erros = 0
-    tentativa = len(palavra_secreta) + 2
+    tentativa = len(palavra_secreta) + 3
     # Essa lógica pode prejudicar o jogador, pois se ele erra 1 vez,
     # pode perder o jogo se as letras forem diferentes. Logo,seria interessante deixar 2 tentativas a mais, somando-a,
     # ficando como: tentativa = len(palavra_secreta) + 2.
@@ -40,18 +30,76 @@ def jogar():
                 erros += 1
         tentativa = tentativa - 1
         total_tentativa = tentativa
-        enforcou = erros == 6
+        enforcou = (erros == total_tentativa)
         acertou = "_" not in letras_acertadas
         print(letras_acertadas)
         print("Ainda restam {} tentativas".format(total_tentativa))
     if acertou:
-        print("Você ganhou!")
+        imprime_mensagem_vencedor()
     else:
-        print("Você perdeu!")
+        imprime_mensagem_perdedor(palavra_secreta)
 
     print("fim de jogo!")
 
 
+def msg_abertura():
+    print("****************************************")
+    print("Seja bem-vindo ao jogo de Forca - Frutas!")
+    print("****************************************")
+
+
+def load_palavra_secreta():
+    arquivo = open("frutas.txt", "r")
+    palavras = []
+
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
+    arquivo.close()
+
+    numero = random.randrange(0, len(palavras))
+    palavra_secreta = palavras[numero].upper()
+    return palavra_secreta
+
+
+def inicia_letra_acertada(palavra):
+    return ["_" for letra in palavra]
+
+
+def imprime_mensagem_perdedor(palavra_secreta):
+    print("Puxa, você foi enforcado!")
+    print("A palavra era {}".format(palavra_secreta))
+    print("    _______________         ")
+    print("   /               \       ")
+    print("  /                 \      ")
+    print("//                   \/\  ")
+    print("\|   XXXX     XXXX   | /   ")
+    print(" |   XXXX     XXXX   |/     ")
+    print(" |   XXX       XXX   |      ")
+    print(" |                   |      ")
+    print(" \__      XXX      __/     ")
+    print("   |\     XXX     /|       ")
+    print("   | |           | |        ")
+    print("   | I I I I I I I |        ")
+    print("   |  I I I I I I  |        ")
+    print("   \_             _/       ")
+    print("     \_         _/         ")
+    print("       \_______/           ")
+
+
+def imprime_mensagem_vencedor():
+    print("Parabéns, você ganhou!")
+    print("       ___________      ")
+    print("      '._==_==_=_.'     ")
+    print("      .-\\:      /-.    ")
+    print("     | (|:.     |) |    ")
+    print("      '-|:.     |-'     ")
+    print("        \\::.    /      ")
+    print("         '::. .'        ")
+    print("           ) (          ")
+    print("         _.' '._        ")
+    print("        '-------'       ")
+
+
 if __name__ == "__main__":
     jogar()
-
