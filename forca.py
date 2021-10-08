@@ -12,10 +12,8 @@ def jogar():
     acertou = False
     erros = 0
     tentativa = len(palavra_secreta) + 3
-    # Essa lógica pode prejudicar o jogador, pois se ele erra 1 vez,
-    # pode perder o jogo se as letras forem diferentes. Logo,seria interessante deixar 2 tentativas a mais, somando-a,
-    # ficando como: tentativa = len(palavra_secreta) + 2.
-
+    # O número de tentativas deve ser maior que a quantidade de letras da palavra, dando chances ao jogador se ele errar uma vez
+    
     while not enforcou and not acertou:
         chute = input("Qual letra? ")
         chute = chute.strip().upper()
