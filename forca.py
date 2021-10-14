@@ -26,12 +26,16 @@ def jogar():
                 index += 1
             else:
                 erros += 1
+                
+                
         tentativa = tentativa - 1
         total_tentativa = tentativa
         enforcou = (erros == total_tentativa)
         acertou = "_" not in letras_acertadas
         print(letras_acertadas)
         print("Ainda restam {} tentativas".format(total_tentativa))
+        
+        
     if acertou:
         imprime_mensagem_vencedor()
     else:
