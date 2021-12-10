@@ -11,9 +11,9 @@ def jogar():
     enforcou = False
     acertou = False
     erros = 0
-    tentativa = len(palavra_secreta) + 3
-    # O número de tentativas deve ser maior que a quantidade de letras da palavra, dando chances ao jogador se ele errar uma vez
-    
+    tentativa = len(palavra_secreta)
+   
+
     while not enforcou and not acertou:
         chute = input("Qual letra? ")
         chute = chute.strip().upper()
@@ -26,16 +26,12 @@ def jogar():
                 index += 1
             else:
                 erros += 1
-                
-                
         tentativa = tentativa - 1
         total_tentativa = tentativa
         enforcou = (erros == total_tentativa)
         acertou = "_" not in letras_acertadas
         print(letras_acertadas)
         print("Ainda restam {} tentativas".format(total_tentativa))
-        
-        
     if acertou:
         imprime_mensagem_vencedor()
     else:
