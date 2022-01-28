@@ -8,7 +8,7 @@ class Cria_conta:
         self.__limite = limite
 
     def extrato(self):
-        print("O saldo {} do titular {}".format(self.__saldo, self.__titular))
+        print("o titular {} possui o saldo de R${} ".format(self.__saldo, self.__titular))
 
     def depositar(self, valor):
         self.__saldo += valor
@@ -22,9 +22,7 @@ class Cria_conta:
             self.__saldo -= valor
         else:
             print("O valor {} passou o limite".format(valor))
-
-        self.__saldo -= valor
-
+            
     def transferir(self, valor, destino):
         self.sacar(valor)
         destino.depositar(valor)
